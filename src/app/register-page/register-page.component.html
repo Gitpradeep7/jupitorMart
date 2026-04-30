@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="form-box">
+    <h2>Register</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <input formControlName="employeeId" placeholder="Employee ID" />
+
+      <div class="error" *ngIf="getReqError('employeeId')">
+        <span *ngIf="employeeId?.errors?.['required']">
+          {{ validations.id }}
+        </span>
+        <span *ngIf="employeeId?.errors?.['pattern']">
+          {{ validations.id_digit }}
+        </span>
+      </div>
+
+      <input formControlName="name" placeholder="Full Name" />
+      <div class="error" *ngIf="getReqError('name')">
+        <span>{{validations.name}}</span>
+      </div>
+
+      <input formControlName="username" placeholder="Username" />
+      <div class="error" *ngIf="getReqError('username')">
+        <span>{{validations.field}}</span>
+      </div>
+
+      <input formControlName="age" type="number" placeholder="Age" />
+      <div class="error" *ngIf="getReqError('age')">
+        <span *ngIf="age?.errors?.['required']">{{validations.field}}</span>
+        <span *ngIf="age?.errors?.['min']"> {{validations.adult}}</span>
+      </div>
+
+      <select formControlName="gender">
+        <option value="">Select Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+      <div class="error" *ngIf="getReqError('gender')">
+        <span>{{validations.field}}</span>
+      </div>
+
+      <input formControlName="address" placeholder="Address" />
+      <div class="error" *ngIf="getReqError('address')">
+        <span>{{validations.field}}</span>
+      </div>
+
+      <input formControlName="phone" placeholder="Phone Number" />
+      <div class="error" *ngIf="getReqError('phone')">
+        <span *ngIf="phone?.errors?.['required']">{{validations.field}}</span>
+        <span *ngIf="phone?.errors?.['pattern']">{{validations.phoneNum}}</span>
+      </div>
+
+      <input formControlName="email" type="email" placeholder="Email" />
+      <div class="error" *ngIf="getReqError('email')">
+        <span *ngIf="email?.errors?.['required']">{{validations.field}}</span>
+        <span *ngIf="email?.errors?.['pattern']">{{validations.email}}</span>
+      </div>
+
+      <ng-container formGroupName="passwordGroup">
+        <input formControlName="password" placeholder="password" type="password" />
+        <div *ngIf="password.invalid && password.touched" class="error">
+          <span *ngIf="password.errors?.['required']">Password is required</span>
+          <span *ngIf="password.errors?.['minlength']">Minimum 8 characters</span>
+        </div>
+        {{!password.value}}!!
+        <input formControlName="confirmPassword" placeholder="confirmPassword" type="password" />
+        <!-- Group-level error — password mismatch -->
+        <div *ngIf="passwordGroup.errors?.['passwordMismatch']
+                  && confirmPassword.touched" class="error">
+          Passwords do not match!
+        </div>
+
+      </ng-container>
+      {{this.registerForm.value | json}}
+      <button type="submit" >Register {{this.registerForm.valid}}@@</button>
+    </form>
+    <a routerLink="/login">Already have an account? Login</a>
+  </div>
+</div>

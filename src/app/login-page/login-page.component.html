@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="form-box">
+    <h2>login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <input formControlName="username" placeholder="Username" />
+      <div class="error" *ngIf="loginForm.get('username')?.errors?.['required'] && loginForm.get('username')?.errors?.['touched'] && !loginForm.get('username')?.value">
+        <span>{{validations.field}}</span>
+      </div>
+      <input formControlName="password" type="password" placeholder="Password" /><br />
+      <div class="error"
+        *ngIf="loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.errors?.['touched']">
+        <span>{{validations.password}}</span>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+    <a routerLink="/register">New user? Register here</a>
+  </div>
+</div>
