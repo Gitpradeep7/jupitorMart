@@ -7,4 +7,4 @@ export const FORM_VALIDATION = {
     email: 'Email is not valid',
     phoneNum: 'Phone Number is must be 10 digits',
     field: 'This field is Required'
-}
+};

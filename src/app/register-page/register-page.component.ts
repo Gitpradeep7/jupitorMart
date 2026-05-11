@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Router } from '@angular/router';
 import { NetworkService } from '../network.service';
 import { FORM_VALIDATION } from '../shared/reusable-components/card/constant';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-register-page',
@@ -29,7 +30,7 @@ export class RegisterPageComponent {
       }, { validators: this.passwordMatchValidator }),
   });
 
-  constructor(private fb: FormBuilder, private service: NetworkService, private router: Router) {}
+  constructor(private fb: FormBuilder, private service: NetworkService, private userservice: UserService, private router: Router) {}
   get employeeId()       { return this.registerForm.get('employeeId')!; }
   get name()        { return this.registerForm.get('name')!; }
   get username()       { return this.registerForm.get('username')!; }
@@ -59,20 +60,12 @@ export class RegisterPageComponent {
     return password === confirmPassword ? null : { passwordMismatch: true };
   }
   onSubmit() {
-      if(localStorage.getItem('jupitorUsers')) {
-        let data = localStorage.getItem('jupitorUsers');
-        let users = JSON.parse(data!);
-        users.push(this.registerForm.value);
-        localStorage.setItem('jupitorUsers',JSON.stringify(users));
-        console.log('user 123 ',users);
-      } else {
-        localStorage.setItem('jupitorUsers',JSON.stringify([this.registerForm.value]));
-        console.log('1111 user 1st time ',this.registerForm.value);
-      }
-      alert('Registration successful! Please login.');
+    let register = {...this.registerForm.value,password: this.password};
+      this.userservice.addUser(register).subscribe((res:any) =>{
+        alert('Registration successful! Please login.');
+        console.log("res",res);
+      });
       this.router.navigate(['/login']);
-      // this.auth.register(userData);
-      // this.router.navigate(['/login']);
   }
   
   getReqError(formControl: string){

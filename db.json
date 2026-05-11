@@ -1,0 +1,99 @@
+{
+  "users": [
+    {
+      "address": "Vegivaripalem",
+      "age": 26,
+      "email": "pradeepyellamelli0@gmail.com",
+      "employeeId": "2024015",
+      "gender": "Male",
+      "name": "Pradeep Yellamelli",
+      "password": "Art5t@r77",
+      "passwordGroup": {
+        "password": "Art5t@r77",
+        "confirmPassword": "Art5t@r77"
+      },
+      "phone": "09121458783",
+      "username": "pradeep",
+      "id": "XDv8_TMBkHo"
+    },
+    {
+      "address": "Srikakulam",
+      "age": 25,
+      "email": "aruna@gmail.com",
+      "employeeId": "2024014",
+      "gender": "Female",
+      "name": "Aruna Panga",
+      "password": "Aruna@12345",
+      "passwordGroup": {
+        "password": "Aruna@12345",
+        "confirmPassword": "Aruna@12345"
+      },
+      "phone": "9014379469",
+      "username": "Aruna",
+      "id": "1G7nKsfDnok"
+    },
+    {
+      "employeeId": "2022040",
+      "name": "Durga Prasad Tanakala",
+      "username": "Durga",
+      "age": 28,
+      "gender": "Male",
+      "address": "Bhimavaram",
+      "phone": "9347957757",
+      "email": "durgaprasad@gmail.com",
+      "password": "Durga@12345",
+      "passwordGroup": {
+        "password": "Durga@12345",
+        "confirmPassword": "Durga@12345"
+      },
+      "id": "bK8F9Fd74vo"
+    },
+    {
+      "employeeId": "2022033",
+      "name": "Mahesh Gundlapalli",
+      "username": "mahesh",
+      "age": 25,
+      "gender": "Male",
+      "address": "Khamam",
+      "phone": "8184801541",
+      "email": "mahesh@gmail.com",
+      "password": "Mahesh@12345",
+      "passwordGroup": {
+        "password": "Mahesh@12345",
+        "confirmPassword": "Mahesh@12345"
+      },
+      "id": "Xu9R22tykxs"
+    }
+  ],
+  "loginusers": [
+    {
+      "address": "Vegivaripalem",
+      "age": 26,
+      "email": "pradeepyellamelli0@gmail.com",
+      "employeeId": "2024015",
+      "gender": "Male",
+      "name": "Pradeep Yellamelli",
+      "password": "Art5t@r77",
+      "passwordGroup": {
+        "password": "Art5t@r77",
+        "confirmPassword": "Art5t@r77"
+      },
+      "phone": "09121458783",
+      "username": "pradeep",
+      "id": "fthM8CKuOlM"
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "title": "Laptop",
+      "price": 50000
+    },
+    {
+      "id": "2",
+      "title": "Mobile",
+      "price": 20000
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

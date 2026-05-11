@@ -10,8 +10,11 @@ import { HomeComponent } from './home/home.component';
 import { CardComponent } from './shared/reusable-components/card/card.component';
 import { HeaderComponent } from './header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { WorkspaceComponent } from './workspace/workspace.component';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
+import { LogoutComponent } from './logout/logout.component';
+import { ToasterComponent } from './shared/reusable-component/toaster/toaster.component';
+import { ProductdetailComponent } from './productdetail/productdetail.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +23,9 @@ import { AuthInterceptor } from './interceptor/auth.interceptor';
     HomeComponent,
     CardComponent,
     HeaderComponent,
-    WorkspaceComponent
+    LogoutComponent,
+    ToasterComponent,
+    ProductdetailComponent
   ],
   imports: [
     BrowserModule,

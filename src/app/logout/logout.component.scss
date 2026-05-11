@@ -1,0 +1,10 @@
+.center-container {
+    background-color: rgb(87, 182, 236);
+    width: 400px;
+    height: 200px;
+
+    .buttons {
+        display: flex;
+        justify-content: space-around;
+    }
+}

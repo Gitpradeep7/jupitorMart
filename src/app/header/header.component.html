@@ -1,4 +1,10 @@
 <div class="head">
-    <h2>Jupiter Mart</h2>
-    <span>User: {{currentUser?.username}}</span>
+    <nav>
+        <ul>
+            <li><a >Login</a></li>
+            <li><a >cart {{currentUser}}</a></li>
+            <li><a >{{currentUser || 'unknown'}}</a></li>
+            <li (click)="logout()"><a >Logout</a></li>
+        </ul>
+    </nav>
 </div>

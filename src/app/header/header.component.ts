@@ -13,7 +13,12 @@ export class HeaderComponent {
   }
   ngOnInit(){
     this.network.getUser().subscribe((res:any)=>{
-      this.currentUser = res;
-    })
+      console.log(res,' get user 123 ',res?.name);
+      this.currentUser = res?.name;
+    });
+  }
+
+  logout(){
+    this.network.logout(true);
   }
 }

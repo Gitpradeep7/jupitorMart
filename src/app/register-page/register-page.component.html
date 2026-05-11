@@ -70,8 +70,7 @@
         </div>
 
       </ng-container>
-      {{this.registerForm.value | json}}
-      <button type="submit" >Register {{this.registerForm.valid}}@@</button>
+      <button type="submit" [disabled]="!this.registerForm.valid">Register {{this.registerForm.valid}}</button>
     </form>
     <a routerLink="/login">Already have an account? Login</a>
   </div>
