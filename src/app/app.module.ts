@@ -14,6 +14,7 @@ import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { LogoutComponent } from './logout/logout.component';
 import { ToasterComponent } from './shared/reusable-component/toaster/toaster.component';
 import { ProductdetailComponent } from './productdetail/productdetail.component';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ProductdetailComponent } from './productdetail/productdetail.component'
     HeaderComponent,
     LogoutComponent,
     ToasterComponent,
-    ProductdetailComponent
+    ProductdetailComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

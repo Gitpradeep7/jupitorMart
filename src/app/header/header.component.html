@@ -1,10 +1,28 @@
-<div class="head">
-    <nav>
-        <ul>
-            <li><a >Login</a></li>
-            <li><a >cart {{currentUser}}</a></li>
-            <li><a >{{currentUser || 'unknown'}}</a></li>
-            <li (click)="logout()"><a >Logout</a></li>
-        </ul>
-    </nav>
-</div>
+
+<header class="navbar">
+
+  <div class="logo" routerLink="/home">
+    Jupiter
+  </div>
+
+  <nav>
+    <ul>
+      <li routerLink="/cart">
+        <span>
+          🛒 Cart
+          <span class="badge" *ngIf="cartCount.length">{{ cartCount?.length || 0 }}</span>
+        </span>
+      </li>
+
+      <li class="user">
+        👤 {{ currentUser?.name || 'Guest' }}
+      </li>
+
+      <li (click)="logout()">
+        <span>Logout</span>
+      </li>
+
+    </ul>
+  </nav>
+
+</header>

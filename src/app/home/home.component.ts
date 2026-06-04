@@ -13,29 +13,27 @@ export class HomeComponent {
   currentUser: any = {};
 constructor(private network: NetworkService){
 }
-data =[ {
-    id: 1,
-    title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-    price: 159.95,
-    description: "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-    category: "men's clothing",
-    image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_t.png",
-    rating: {
-        rate: 3.9,
-        count: 120
-    }
-}]
 ngOnInit(){
-  this.network.getUser().subscribe((res: any) =>{
-    this.currentUser = res;
-   });
-  const mock = this.data.map((res:any)=>{
-    return {...res,price: res.price + 50}
-  });
-  this.network.getStore().subscribe((res:any)=>{
-    this.products = res.map((val: any)=>{
-      return {...val, price: val.price + 50}
-    });
+  this.network.getCart();
+  this.network.cartItem$.subscribe((res:any) =>{
+    console.log('network cart ',res);
+  })
+  const storedUser = localStorage.getItem('jupiterCurrentUser');
+  if (storedUser) {
+    const data = JSON.parse(storedUser);
+    this.currentUser = data;
+  }
+  this.network.getProductsFromOurServer().subscribe((res:any) =>{
+    if(res.length== 0){
+      this.network.getProducts().subscribe((res:any)=>{
+        this.products = res;
+        this.network.updateProductsInOurServer(res).subscribe((resp:any) =>{
+          console.log('got in server ',resp);
+        });
+      });
+    } else {
+      this.products = res;
+    }
     this.originalProducts = this.products;
   });
 }

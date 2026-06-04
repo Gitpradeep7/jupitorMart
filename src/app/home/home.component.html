@@ -1,12 +1,32 @@
 <app-header></app-header>
-<div class="search">
-    <input type="text" [(ngModel)]="searchItem" placeholder="search here">
-</div>
-<div class="box">
-    <div *ngFor="let product of filteredProducts()" class="card">
-        <app-card  [product]="product" ></app-card>
+
+<div class="home-container">
+
+  <div class="search-section">
+    <input
+      type="text"
+      [(ngModel)]="searchItem"
+      placeholder="🔍 Search products..."
+    >
+  </div>
+
+  <div class="products-grid">
+
+    <div
+      class="product-wrapper"
+      *ngFor="let product of filteredProducts()">
+      <app-card [product]="product"></app-card>
     </div>
-    <div class="noProduct" *ngIf="filteredProducts()?.length === 0 ">
-    <h1>No result Found</h1>
-</div>
+
+  </div>
+
+  <div
+    class="no-product"
+    *ngIf="filteredProducts()?.length === 0">
+
+    <h1>😔 No Products Found</h1>
+    <p>Try searching with another keyword.</p>
+
+  </div>
+
 </div>

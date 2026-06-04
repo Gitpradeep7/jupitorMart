@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NetworkService } from '../network.service';
+import { ActivatedRoute } from '@angular/router';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -8,15 +10,26 @@ import { NetworkService } from '../network.service';
 })
 export class HeaderComponent {
   currentUser:any = {};
-  constructor(private network : NetworkService){
-
+  currenturl:string='';
+  cartCount:any= [];
+  constructor(private network : NetworkService, private cart: CartService){
   }
   ngOnInit(){
-    this.network.getUser().subscribe((res:any)=>{
-      console.log(res,' get user 123 ',res?.name);
-      this.currentUser = res?.name;
-    });
+    let data = localStorage.getItem('jupiterCurrentUser');
+    if(data){
+      this.currentUser = JSON.parse(data);
+    }
+
+    this.cart.getCart().subscribe((cart:any)=>{
+      cart.filter((res:any)=>{
+        if(res.hasOwnProperty(this.currentUser.email)){
+          this.cartCount = res[this.currentUser.email];
+          console.log('cartcount',this.cartCount, '** ',Array.isArray(this.cartCount));
+        }
+      });
+    })
   }
+
 
   logout(){
     this.network.logout(true);

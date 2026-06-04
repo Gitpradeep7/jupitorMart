@@ -60,12 +60,16 @@ export class RegisterPageComponent {
     return password === confirmPassword ? null : { passwordMismatch: true };
   }
   onSubmit() {
-    let register = {...this.registerForm.value,password: this.password};
+    let register = {...this.registerForm.value,password: this.password.value};
+    delete register.passwordGroup;
+   //    let register = {...this.registerForm.value};
+
+    console.log('register 123 ',register);
       this.userservice.addUser(register).subscribe((res:any) =>{
         alert('Registration successful! Please login.');
         console.log("res",res);
+        this.router.navigate(['/login']);
       });
-      this.router.navigate(['/login']);
   }
   
   getReqError(formControl: string){

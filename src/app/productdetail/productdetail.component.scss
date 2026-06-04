@@ -114,5 +114,8 @@
         background: #000;
       }
     }
+    .disbutton:disabled {
+      opacity: 0.3;
+    }
   }
 }

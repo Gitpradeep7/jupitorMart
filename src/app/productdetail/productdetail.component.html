@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div class="product-detail-container" *ngIf="product">
   <div class="product-layout">
     <div class="product-image">
@@ -9,7 +10,7 @@
       <h1>{{ product.title }}</h1>
       
       <div class="rating-badge">
-        ★ {{ product.rating.rate }} | {{ product.rating.count }} Reviews
+        ★ {{ product.rating?.rate }} | {{ product.rating?.count }} Reviews
       </div>
 
       <p class="description">{{ product.description }}</p>
@@ -18,12 +19,12 @@
 
       <div class="action-section">
         <div class="quantity-controls">
-          <button (click)="decreaseQty()" [disabled]="quantity <= 1">-</button>
+          <button (click)="decreaseQty()" [disabled]="quantity <= 0">-</button>
           <span class="qty-count">{{ quantity }}</span>
           <button (click)="increaseQty()">+</button>
         </div>
 
-        <button class="btn-add-cart" (click)="addToCart()">
+        <button class="btn-add-cart disbutton" (click)="addToCart()" [disabled]="quantity <= 0">
           ADD TO CART
         </button>
       </div>

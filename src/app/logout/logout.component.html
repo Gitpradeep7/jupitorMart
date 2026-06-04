@@ -1,9 +1,25 @@
-<div class="center-container" >
-    <div class="pop-up">
-        <h3>Do you want to logout</h3>
+<div class="modal-overlay">
+
+    <div class="logout-modal">
+
+        <div class="modal-header">
+            <h2>Logout</h2>
+        </div>
+
+        <div class="modal-body">
+            <p>Are you sure you want to logout?</p>
+        </div>
+
+        <div class="modal-actions">
+            <button class="cancel-btn" (click)="cancel()">
+                Cancel
+            </button>
+
+            <button class="logout-btn" (click)="logout()">
+                Logout
+            </button>
+        </div>
+
     </div>
-    <div class="buttons">
-        <button class="logout" (click)="logout()">logout</button>
-        <button class="cancel" (click)="cancel()">cancel</button>
-    </div>
+
 </div>

@@ -1,61 +1,71 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, of, Subject } from 'rxjs';
-import { LoginUserService } from './services/loginuser.service';
 import { Router } from '@angular/router';
+import { CartService } from './services/cart.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NetworkService {
-  private currentUser = new BehaviorSubject<any>(null);
-  presentUser = this.currentUser.asObservable();
-
   private isLogout = new BehaviorSubject<boolean>(false);
   isLogout$ = this.isLogout.asObservable();
-
-  constructor(private http: HttpClient, private loginservice: LoginUserService, private router: Router) {
+  
+  existProductAPIURL = 'http://localhost:3000/products';
+  productAPI = 'https://fakestoreapi.com/products';
+  constructor(private http: HttpClient) {
+    localStorage.setItem('isLoggedIn','fasle');
   }
-  ngOnInit(){
-    this.loginservice.getloginUser().subscribe((res:any)=>{
-      this.currentUser.next(res);
+
+  private cart = inject(CartService);
+  private cartItem = new Subject<any>();
+  cartItem$ = this.cartItem.asObservable();
+  email: any;
+  ngOnInit() {}
+
+  getCart(){
+    let m = localStorage.getItem('jupiterCurrentUser');
+    let currentUser ='';
+    if(m){
+      currentUser = JSON.parse(m).email;
+    }
+    this.cart.getCart().subscribe((cart:any)=>{
+      let g = cart.filter((ca:any) =>{
+         //ca.includes(currentUser)
+      })
+      console.log(' ** ',g);
+      if(cart[currentUser]){
+        console.log('cartt ',g)
+        this.cartItem.next(cart[currentUser]);
+      }
     })
   }
-    getStore() {
-     return this.http.get('https://fakestoreapi.com/products');
-    }
+  getProducts() {
+    return this.http.get(this.productAPI);
+  }
 
-    getProduct(id:any){
-      return this.http.get(`https://fakestoreapi.com/products/${id}`);
-    }
-    currUser(data:any){
-      console.log('data 123 ',data);
-      if(data === null){
-        this.loginservice.deleteloginUser(data?.id).subscribe((res:any) =>{
-          console.log('delete :: ',res);
-          this.router.navigate(['/login']);
-        });
-      } else {
-        this.loginservice.addloginUser(data).subscribe((res:any)=>{
-          console.log(res,' ADD ::');
-        });
-      }
-        this.currentUser.next(data);
-      }
-      
-      getUser(){
-      let user;
-      this.loginservice.getloginUser().subscribe((res:any)=>{
-        user = res;
+  getProductsFromOurServer() {
+    return this.http.get(this.existProductAPIURL);
+  }
+
+  updateProductsInOurServer(data: any) {
+    data.forEach((product: any) => {
+      this.http.post(this.existProductAPIURL, product).subscribe((res) => {
+        console.log('123 :: ', res);
       });
-      return this.presentUser || of(user);
-    }
+    });
+    return this.http.post(this.existProductAPIURL, data);
+  }
 
-    logout(islogout: boolean){
-      this.isLogout.next(islogout);
-    }
+  getProductById(id: any) {
+    return this.http.get(`${this.existProductAPIURL}/${id}`);
+  }
 
-    logoutFlag(){
-      return this.isLogout$;
-    }
+  logout(islogout: boolean) {
+    this.isLogout.next(islogout);
+  }
+
+  logoutFlag() {
+    return this.isLogout$;
+  }
 }

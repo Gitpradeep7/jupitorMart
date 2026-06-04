@@ -6,11 +6,13 @@ import { HomeComponent } from './home/home.component';
 import { authGuard } from './guards/auth.guard';
 import { LogoutComponent } from './logout/logout.component';
 import { ProductdetailComponent } from './productdetail/productdetail.component';
+import { CartComponent } from './cart/cart.component';
 
 const routes: Routes = [{path:'', component: RegisterPageComponent}, 
   {path:'login',component : LoginPageComponent},
   {path:'register', redirectTo:'',pathMatch:'full'},
-  { path: 'product/:id', component: ProductdetailComponent },
+  {path:'cart', component: CartComponent},
+  { path: 'product/:id', component: ProductdetailComponent,canActivate: [authGuard] },
   {path:'home', component: HomeComponent, canActivate: [authGuard]}
 ];
 
